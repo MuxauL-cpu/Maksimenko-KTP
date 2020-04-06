@@ -2,15 +2,22 @@ package com.company;
 
 import java.util.HashMap;
 
+/**
+ * Класс хранит базовое состояние необходимое для алгоритма А*, чтобы вычислить
+ * путь по карте. Это состояние включает коллекции "открытых точек" и другие коллеции
+ * "закрытых точек". Также этот класс обеспечивает основные операци А* алгоритма,
+ * для обработки алгоритма.
+ */
+
 public class AStarState
 {
-    /** This is a reference to the map that the A* algorithm is navigating. **/
+    /** Это ссылка на карту, по которой работает алгоритм А*. **/
     private Map2D map;
     public HashMap <Location, Waypoint> Opened = new HashMap <Location, Waypoint>();
     public HashMap <Location, Waypoint> Closed = new HashMap <Location, Waypoint>();
 
     /**
-     * Initialize a new state object for the A* pathfinding algorithm to use.
+     * Создание нового объекта для алгоритма поиска А*.
      **/
     public AStarState(Map2D map)
     {
@@ -20,17 +27,18 @@ public class AStarState
         this.map = map;
     }
 
-    /** Returns the map that the A* pathfinder is navigating. **/
+    /** Возвращает карту, по которой работает алгоритм А*. **/
     public Map2D getMap()
     {
         return map;
     }
 
     /**
-     * This method scans through all open waypoints, and returns the waypoint
-     * with the minimum total cost.  If there are no open waypoints, this method
-     * returns <code>null</code>.
-     **/
+     * Этот метод просматривает все открытые точки и возвращает точку с
+     * минимальным общим значением.
+     * Если нет открытых точек, метод возвращает null.
+     */
+    
     public Waypoint getMinOpenWaypoint()
     {
         if (Opened.size() == 0) return null;
@@ -52,14 +60,13 @@ public class AStarState
     }
 
     /**
-     * This method adds a waypoint to (or potentially updates a waypoint already
-     * in) the "open waypoints" collection.  If there is not already an open
-     * waypoint at the new waypoint's location then the new waypoint is simply
-     * added to the collection.  However, if there is already a waypoint at the
-     * new waypoint's location, the new waypoint replaces the old one <em>only
-     * if</em> the new waypoint's "previous cost" value is less than the current
-     * waypoint's "previous cost" value.
-     **/
+     * Этот метод добавляет точку в коллекцию открытых точек.
+     * Если в местополодении новой точки нет уде открытой новой точки,
+     * то она добавляется в коллекцию. Однако, если в коллекции есть точка,
+     * новая точка заменяет старую точку, если значение новой точки меньше
+     * текущей.
+     */
+    
     public boolean addOpenWaypoint(Waypoint newWP)
     {
         if(!Opened.containsKey(newWP.getLocation())) {
@@ -78,7 +85,7 @@ public class AStarState
     }
 
 
-    /** Returns the current number of open waypoints. **/
+    /** Возвраащет количество открытых точек. **/
     public int numOpenWaypoints()
     {
         return Opened.size();
@@ -86,8 +93,8 @@ public class AStarState
 
 
     /**
-     * This method moves the waypoint at the specified location from the
-     * open list to the closed list.
+     * Этот метод перемещает точку в указанном месте из открытого списка в закрытый.
+     * из открытого списка в закрытый.
      **/
     public void closeWaypoint(Location loc)
     {
@@ -97,8 +104,8 @@ public class AStarState
     }
 
     /**
-     * Returns true if the collection of closed waypoints contains a waypoint
-     * for the specified location.
+     * Возвращает true, если коллекция зыкрытых точек содержит точку
+     * для указанного местоположения.
      **/
     public boolean isLocationClosed(Location loc)
     {
