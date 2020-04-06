@@ -4,21 +4,21 @@ import java.util.Objects;
 
 public class Location
 {
-    /** X coordinate of this location. **/
+    /** Координаты по X. **/
     public int xCoord;
 
-    /** Y coordinate of this location. **/
+    /** Координаты по Y. **/
     public int yCoord;
 
 
-    /** Creates a new location with the specified integer coordinates. **/
+    /** Создание нового местоположения с указанными целочисленными координатами. **/
     public Location(int x, int y)
     {
         xCoord = x;
         yCoord = y;
     }
 
-    /** Creates a new location with coordinates (0, 0). **/
+    /** Создание местоположения с координатами (0,0). **/
     public Location()
     {
         this(0, 0);
